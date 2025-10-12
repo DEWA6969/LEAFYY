@@ -20,12 +20,12 @@ export const Input = ({
       {label && <Text variant="caption" style={styles.label}>{label}</Text>}
       <View style={[styles.inputContainer, error && styles.inputError]}>
         {icon && (
-          <Ionicons name={icon} size={20} color="#ffffff" style={styles.icon} />
+          <Ionicons name={icon} size={20} color="#6b7280" style={styles.icon} />
         )}
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          placeholderTextColor="#ffffff"
+          placeholderTextColor="#9ca3af"
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
@@ -44,16 +44,16 @@ const styles = StyleSheet.create({
   },
   label: {
     marginBottom: 8,
-    color: '#ffffff',
+    color: '#374151',
     fontWeight: '500',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#ffffff',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: '#d1d5db',
     paddingHorizontal: 16,
     height: 50,
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: '#ffffff',
+    color: '#1f2937',
   },
   errorText: {
     color: '#ef4444',

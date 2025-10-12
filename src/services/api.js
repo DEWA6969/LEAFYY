@@ -1,10 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// URL Basis API - Ubah ini ke alamat IP komputer Anda jika menguji pada perangkat sebenarnya
-const API_URL = 'http://20.60.17.158:3000/api';
+// URL Basis API - Otomatis detect environment
+const API_URL = __DEV__ 
+  ? 'http://localhost:3000/api'  // Development - localhost
+  : 'http://20.60.17.158:3000/api'; // Production
 
-// For testing on real device, use your computer's IP address:
-// const API_URL = 'http://192.168.1.100:3000/api'; // Replace with your IP
+// For testing on real device, uncomment and replace with your IP:
+// const API_URL = 'http://192.168.1.100:3000/api';
 
 class API {
   // Helper function to get headers
@@ -27,27 +29,37 @@ class API {
         body: JSON.stringify(userData),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       return data;
     } catch (error) {
       console.error('Register API error:', error);
       return {
         success: false,
-        message: 'Tidak dapat terhubung ke server',
+        message: error.message.includes('Network') 
+          ? 'Tidak dapat terhubung ke server. Pastikan backend sudah running.'
+          : 'Terjadi kesalahan saat mendaftar',
       };
     }
   }
 
   // Verify OTP
-  async verifyOTP(userId, otp) {
+  async verifyOTP(email, otp) {
     try {
       const response = await fetch(`${API_URL}/auth/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId, otp }),
+        body: JSON.stringify({ email, otp }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
       return data;
@@ -55,21 +67,27 @@ class API {
       console.error('Verify OTP API error:', error);
       return {
         success: false,
-        message: 'Tidak dapat terhubung ke server',
+        message: error.message.includes('Network') 
+          ? 'Tidak dapat terhubung ke server. Pastikan backend sudah running.'
+          : 'Terjadi kesalahan saat verifikasi OTP',
       };
     }
   }
 
   // Resend OTP
-  async resendOTP(userId) {
+  async resendOTP(email) {
     try {
       const response = await fetch(`${API_URL}/auth/resend-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ email }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
       return data;
@@ -77,7 +95,9 @@ class API {
       console.error('Resend OTP API error:', error);
       return {
         success: false,
-        message: 'Tidak dapat terhubung ke server',
+        message: error.message.includes('Network') 
+          ? 'Tidak dapat terhubung ke server. Pastikan backend sudah running.'
+          : 'Terjadi kesalahan saat mengirim ulang OTP',
       };
     }
   }
@@ -93,13 +113,19 @@ class API {
         body: JSON.stringify({ email, password }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       return data;
     } catch (error) {
       console.error('Login API error:', error);
       return {
         success: false,
-        message: 'Tidak dapat terhubung ke server',
+        message: error.message.includes('Network') 
+          ? 'Tidak dapat terhubung ke server. Pastikan backend sudah running.'
+          : 'Terjadi kesalahan saat login',
       };
     }
   }

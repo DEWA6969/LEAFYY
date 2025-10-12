@@ -98,10 +98,10 @@ export default function Login({ navigation }) {
           
           {/* Title */}
           <View style={styles.textContent}>
-            <Text variant="h1" style={styles.title}>LEAFYY TECH</Text>
-            <Text variant="body" style={styles.subtitle}>
-              Masuk untuk melanjutkan ke aplikasi Leafyy
-            </Text>
+            <View style={styles.titleContainer}>
+              <Text variant="h1" style={styles.titleLeafyy}>LEAFYY</Text>
+              <Text variant="h1" style={styles.titleTech}>TECH</Text>
+            </View>
           </View>
 
           {/* Form */}
@@ -202,10 +202,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 32,
   },
-  title: {
-    color: '#ffffff',
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleLeafyy: {
+    color: 'white',
     textAlign: 'center',
-    marginBottom: 8,
+    fontWeight: '800',
+    fontSize: 28,
+  },
+  titleTech: {
+    color: '#ff6b35',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontSize: 28,
+    marginLeft: 8,
   },
   subtitle: {
     color: '#e5e7eb',

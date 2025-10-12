@@ -144,7 +144,7 @@ export default function Register({ navigation }) {
 
           {/* Logo */}
           <Image
-            source={require('../../assets/.png')}
+            source={require('../../assets/logo.png')}
             style={styles.logo}
             resizeMode="contain"
             onError={(error) => console.log('Logo load error:', error)}
@@ -153,10 +153,10 @@ export default function Register({ navigation }) {
           
           {/* Title */}
           <View style={styles.textContent}>
-            <Text variant="h1" style={styles.title}>Buat Akun Baru</Text>
-            <Text variant="body" style={styles.subtitle}>
-              Lengkapi data di bawah untuk mendaftar
-            </Text>
+            <View style={styles.titleContainer}>
+              <Text variant="h1" style={styles.titleLeafyy}>LEAFYY</Text>
+              <Text variant="h1" style={styles.titleTech}>TECH</Text>
+            </View>
           </View>
 
           {/* Form */}
@@ -297,7 +297,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 24,
   },
-  title: {
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  titleLeafyy: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontSize: 24,
+  },
+  titleTech: {
+    color: '#ff6b35',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontSize: 24,
+    marginLeft: 6,
+  },
+  pageTitle: {
     color: '#1f2937',
     textAlign: 'center',
     marginBottom: 8,

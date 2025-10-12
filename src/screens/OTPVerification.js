@@ -56,7 +56,7 @@ export default function OTPVerification({ route, navigation }) {
       setLoading(true);
       console.log('🔐 Verifying OTP:', otpCode);
       
-      const response = await api.verifyOTP(userId, otpCode);
+      const response = await api.verifyOTP(email, otpCode);
       
       setLoading(false);
       
@@ -93,7 +93,7 @@ export default function OTPVerification({ route, navigation }) {
       setResending(true);
       console.log('📧 Resending OTP...');
       
-      const response = await api.resendOTP(userId);
+      const response = await api.resendOTP(email);
       
       setResending(false);
       
@@ -117,7 +117,11 @@ export default function OTPVerification({ route, navigation }) {
       <View style={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Text variant="h1" style={styles.title}>Verifikasi Email</Text>
+          <View style={styles.titleContainer}>
+            <Text variant="h1" style={styles.titleLeafyy}>LEAFYY</Text>
+            <Text variant="h1" style={styles.titleTech}>TECH</Text>
+          </View>
+          <Text variant="h2" style={styles.pageTitle}>Verifikasi Email</Text>
           <Text variant="body" style={styles.subtitle}>
             Kami telah mengirim kode 6 digit ke
           </Text>
@@ -214,8 +218,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
   },
-  title: {
-    fontSize: 28,
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  titleLeafyy: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontSize: 24,
+  },
+  titleTech: {
+    color: '#ff6b35',
+    textAlign: 'center',
+    fontWeight: '800',
+    fontSize: 24,
+    marginLeft: 6,
+  },
+  pageTitle: {
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#1f2937',
     marginBottom: 12,

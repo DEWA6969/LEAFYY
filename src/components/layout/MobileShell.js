@@ -10,11 +10,10 @@ export const MobileShell = ({ children }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
-          <Image
-            source={require('../../../assets/logo.png')}
-            style={styles.logo}
-            resizeMode="contain"
-          />
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleLeafyy}>LEAFYY</Text>
+            <Text style={styles.titleTech}>TECH</Text>
+          </View>
           <TouchableOpacity style={styles.notificationButton}>
             <Ionicons name="notifications-outline" size={24} color="#6b7280" />
           </TouchableOpacity>
@@ -48,9 +47,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
   },
-  logo: {
-    height: 28,
-    width: 100,
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleLeafyy: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '800',
+  },
+  titleTech: {
+    color: '#ff6b35',
+    fontSize: 20,
+    fontWeight: '800',
+    marginLeft: 4,
   },
   notificationButton: {
     padding: 4,
