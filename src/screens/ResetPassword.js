@@ -96,14 +96,14 @@ export default function ResetPassword({ route, navigation }) {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color="#1f2937" />
+            <Ionicons name="arrow-back" size={24} color="#ffffff" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.content}>
           {/* Icon */}
           <View style={styles.iconContainer}>
-            <Ionicons name="key-outline" size={64} color="#3b82f6" />
+            <Ionicons name="key-outline" size={64} color="#ffffff" />
           </View>
 
           {/* Title */}
@@ -196,7 +196,7 @@ function PasswordRequirement({ met, text }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#03624C',
   },
   scrollContent: {
     flexGrow: 1,
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -252,12 +252,12 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   title: {
-    color: '#1f2937',
+    color: '#ffffff',
     textAlign: 'center',
     marginBottom: 12,
   },
   subtitle: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     textAlign: 'center',
     lineHeight: 24,
   },
@@ -266,14 +266,14 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   requirementsContainer: {
-    backgroundColor: '#f9fafb',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     padding: 16,
     borderRadius: 12,
     marginTop: -12,
     marginBottom: 16,
   },
   requirementsTitle: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     fontWeight: '600',
     marginBottom: 8,
   },
@@ -283,14 +283,14 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   requirementText: {
-    color: '#9ca3af',
+    color: '#d1d5db',
     marginLeft: 8,
   },
   requirementTextMet: {
     color: '#10b981',
   },
   resetButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#2CC295',
     paddingVertical: 16,
   },
   resetButtonText: {

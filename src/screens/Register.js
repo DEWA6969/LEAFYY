@@ -138,7 +138,7 @@ export default function Register({ navigation }) {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons name="arrow-back" size={24} color="#1f2937" />
+              <Ionicons name="arrow-back" size={24} color="#ffffff" />
             </TouchableOpacity>
           </View>
 
@@ -258,7 +258,7 @@ export default function Register({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#03624C',
   },
   scrollContent: {
     flexGrow: 1,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#2CC295',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -317,12 +317,12 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   pageTitle: {
-    color: '#1f2937',
+    color: '#ffffff',
     textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     textAlign: 'center',
     lineHeight: 24,
   },
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   passwordHint: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     marginTop: -12,
     marginBottom: 16,
   },
@@ -351,16 +351,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   checkboxChecked: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
+    backgroundColor: '#2CC295',
+    borderColor: '#2CC295',
   },
   checkboxText: {
     flex: 1,
-    color: '#6b7280',
+    color: '#e5e7eb',
     lineHeight: 20,
   },
   linkText: {
-    color: '#3b82f6',
+    color: '#2CC295',
     fontWeight: '500',
   },
   errorText: {
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   registerButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#2CC295',
     paddingVertical: 16,
     marginBottom: 16,
   },
@@ -384,11 +384,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginLinkText: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     textAlign: 'center',
   },
   loginLinkTextBold: {
-    color: '#3b82f6',
+    color: '#2CC295',
     fontWeight: '600',
   },
 });

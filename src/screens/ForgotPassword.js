@@ -43,7 +43,7 @@ export default function ForgotPassword({ navigation }) {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color="#1f2937" />
+            <Ionicons name="arrow-back" size={24} color="#ffffff" />
           </TouchableOpacity>
         </View>
 
@@ -105,14 +105,14 @@ export default function ForgotPassword({ navigation }) {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color="#1f2937" />
+            <Ionicons name="arrow-back" size={24} color="#ffffff" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.content}>
           {/* Icon */}
           <View style={styles.iconContainer}>
-            <Ionicons name="lock-closed-outline" size={64} color="#3b82f6" />
+            <Ionicons name="lock-closed-outline" size={64} color="#ffffff" />
           </View>
 
           {/* Title */}
@@ -152,7 +152,7 @@ export default function ForgotPassword({ navigation }) {
               style={styles.loginLink}
               onPress={() => navigation.navigate('Login')}
             >
-              <Ionicons name="arrow-back" size={16} color="#3b82f6" />
+              <Ionicons name="arrow-back" size={16} color="#2CC295" />
               <Text variant="body" style={styles.loginLinkText}>
                 Kembali ke Login
               </Text>
@@ -167,7 +167,7 @@ export default function ForgotPassword({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#03624C',
   },
   scrollContent: {
     flexGrow: 1,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -223,24 +223,24 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   title: {
-    color: '#1f2937',
+    color: '#ffffff',
     textAlign: 'center',
     marginBottom: 12,
   },
   subtitle: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 8,
   },
   email: {
-    color: '#3b82f6',
+    color: '#2CC295',
     textAlign: 'center',
     fontWeight: '600',
     marginBottom: 12,
   },
   hint: {
-    color: '#9ca3af',
+    color: '#d1d5db',
     textAlign: 'center',
     fontStyle: 'italic',
   },
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   submitButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#2CC295',
     paddingVertical: 16,
     marginBottom: 16,
   },
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   primaryButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#2CC295',
     paddingVertical: 16,
     marginBottom: 16,
   },
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   loginLinkText: {
-    color: '#3b82f6',
+    color: '#2CC295',
     fontWeight: '500',
   },
   resendButton: {
@@ -285,11 +285,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   resendButtonText: {
-    color: '#6b7280',
+    color: '#e5e7eb',
     textAlign: 'center',
   },
   resendButtonTextBold: {
-    color: '#3b82f6',
+    color: '#2CC295',
     fontWeight: '600',
   },
 });

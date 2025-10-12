@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 26,
   },
   forgotPassword: {
     alignSelf: 'flex-end',
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   loginButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#2CC295',
     paddingVertical: 16,
   },
   loginButtonText: {
