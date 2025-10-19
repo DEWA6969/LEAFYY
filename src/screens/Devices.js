@@ -1,15 +1,20 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Card, CardHeader, CardContent, CardTitle, Button, Text } from '../components/ui';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Devices() {
+  const { colors } = useTheme();
+  
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <Text variant="h2" style={styles.title}>Devices</Text>
         <TouchableOpacity style={styles.addButton}>
-          <Ionicons name="add" size={24} color="#3b82f6" />
+          <Ionicons name="add" size={24} color="#ffffff" />
         </TouchableOpacity>
       </View>
 
@@ -19,7 +24,7 @@ export default function Devices() {
           <CardHeader>
             <CardTitle>
               <View style={styles.deviceHeader}>
-                <Ionicons name="hardware-chip" size={20} color="#3b82f6" />
+                <Ionicons name="hardware-chip" size={20} color="#ffffff" />
                 <Text variant="h3" style={styles.deviceTitle}>Soil Moisture Sensor</Text>
               </View>
             </CardTitle>
@@ -35,10 +40,10 @@ export default function Devices() {
             </View>
             <View style={styles.deviceActions}>
               <Button variant="outline" size="sm" style={styles.actionButton}>
-                <Text variant="caption">Settings</Text>
+                <Text variant="caption" style={styles.actionButtonText}>Settings</Text>
               </Button>
               <Button variant="outline" size="sm" style={styles.actionButton}>
-                <Text variant="caption">Analytics</Text>
+                <Text variant="caption" style={styles.actionButtonText}>Analytics</Text>
               </Button>
             </View>
           </CardContent>
@@ -48,7 +53,7 @@ export default function Devices() {
           <CardHeader>
             <CardTitle>
               <View style={styles.deviceHeader}>
-                <Ionicons name="thermometer" size={20} color="#3b82f6" />
+                <Ionicons name="thermometer" size={20} color="#ffffff" />
                 <Text variant="h3" style={styles.deviceTitle}>Temperature Sensor</Text>
               </View>
             </CardTitle>
@@ -64,10 +69,10 @@ export default function Devices() {
             </View>
             <View style={styles.deviceActions}>
               <Button variant="outline" size="sm" style={styles.actionButton}>
-                <Text variant="caption">Settings</Text>
+                <Text variant="caption" style={styles.actionButtonText}>Settings</Text>
               </Button>
               <Button variant="outline" size="sm" style={styles.actionButton}>
-                <Text variant="caption">Replace Battery</Text>
+                <Text variant="caption" style={styles.actionButtonText}>Replace Battery</Text>
               </Button>
             </View>
           </CardContent>
@@ -77,7 +82,7 @@ export default function Devices() {
         <Card style={styles.addDeviceCard}>
           <CardContent>
             <View style={styles.addDeviceContent}>
-              <Ionicons name="add-circle-outline" size={48} color="#6b7280" />
+              <Ionicons name="add-circle-outline" size={48} color="rgba(255, 255, 255, 0.7)" />
               <Text variant="h3" style={styles.addDeviceTitle}>Add New Device</Text>
               <Text variant="muted" style={styles.addDeviceDescription}>
                 Connect a new sensor to monitor your plants
@@ -89,14 +94,17 @@ export default function Devices() {
           </CardContent>
         </Card>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+  },
+  scrollView: {
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   title: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '700',
   },
   addButton: {
@@ -117,7 +125,8 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   deviceCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   deviceHeader: {
     flexDirection: 'row',
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   deviceTitle: {
-    color: '#1f2937',
+    color: '#ffffff',
   },
   deviceInfo: {
     marginBottom: 16,
@@ -143,14 +152,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#10b981',
   },
   statusText: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '500',
   },
   deviceLocation: {
     marginBottom: 4,
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   lastUpdate: {
     fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.7)',
   },
   deviceActions: {
     flexDirection: 'row',
@@ -158,19 +169,25 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     flex: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  actionButtonText: {
+    color: '#ffffff',
+    fontWeight: '500',
   },
   addDeviceCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderStyle: 'dashed',
     borderWidth: 2,
-    borderColor: '#d1d5db',
+    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
   addDeviceContent: {
     alignItems: 'center',
     paddingVertical: 24,
   },
   addDeviceTitle: {
-    color: '#1f2937',
+    color: '#ffffff',
     marginTop: 12,
     marginBottom: 8,
   },
@@ -178,6 +195,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     paddingHorizontal: 20,
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   connectButton: {
     backgroundColor: '#3b82f6',

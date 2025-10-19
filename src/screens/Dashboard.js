@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Card, CardHeader, CardContent, CardTitle, Button, Progress, Text } from '../components/ui';
 import { LineChart } from 'react-native-chart-kit';
+import { useTheme } from '../context/ThemeContext';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -11,13 +13,14 @@ const chartData = {
   datasets: [
     {
       data: [58, 60, 62, 61, 65, 67, 70],
-      color: (opacity = 1) => `rgba(59, 130, 246, ${opacity})`,
-      strokeWidth: 2,
+      color: (opacity = 1) => `rgba(229, 243, 229, ${opacity})`,
+      strokeWidth: 3,
     },
   ],
 };
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
+  const { colors } = useTheme();
   const [exampleFromServer, setExampleFromServer] = useState('');
 
   useEffect(() => {
@@ -34,19 +37,25 @@ export default function Dashboard() {
     }
   };
 
+  const handleDetailsPress = () => {
+    // Navigate to the dedicated Soil Moisture Details screen
+    navigation.navigate('SoilMoistureDetails');
+  };
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={styles.space}>
         {/* Welcome Section */}
-        <Card style={styles.welcomeCard}>
+        <Card style={[styles.welcomeCard, { backgroundColor: colors.background }]}>
           <View style={styles.welcomeHeader}>
             <View>
-              <Text variant="caption" style={styles.welcomeSubtitle}>Welcome back</Text>
-              <Text variant="h2" style={styles.welcomeTitle}>Hi, Alfi</Text>
+              <Text variant="caption" style={[styles.welcomeSubtitle, { color: colors.textSecondary }]}>Welcome back</Text>
+              <Text variant="h2" style={[styles.welcomeTitle, { color: colors.text }]}>Hi, Alfi</Text>
             </View>
-            <View style={styles.statusBadge}>
-              <Ionicons name="leaf-outline" size={16} color="#3b82f6" />
-              <Text variant="caption" style={styles.statusText}>Healthy garden</Text>
+            <View style={[styles.statusBadge, { backgroundColor: colors.surface }]}>
+              <Ionicons name="leaf-outline" size={16} color={colors.text} />
+              <Text variant="caption" style={[styles.statusText, { color: colors.text }]}>Leafyy Tech</Text>
             </View>
           </View>
           
@@ -67,10 +76,10 @@ export default function Dashboard() {
           <CardContent>
             <View style={styles.moistureHeader}>
               <Text variant="h1" style={styles.moistureValue}>68%</Text>
-              <Button size="sm" variant="outline" style={styles.detailsButton}>
-                <Text variant="caption">Details</Text>
-                <Ionicons name="arrow-up-right" size={16} color="#3b82f6" />
-              </Button>
+              <TouchableOpacity onPress={handleDetailsPress} style={styles.detailsButton}>
+                <Text variant="caption" style={styles.detailsButtonText}>Details</Text>
+                <Ionicons name="arrow-up-right" size={16} color="#ffffff" />
+              </TouchableOpacity>
             </View>
             
             <View style={styles.chartContainer}>
@@ -83,15 +92,15 @@ export default function Dashboard() {
                   backgroundGradientFrom: 'transparent',
                   backgroundGradientTo: 'transparent',
                   decimalPlaces: 0,
-                  color: (opacity = 1) => `rgba(59, 130, 246, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
+                  color: (opacity = 1) => `rgba(229, 243, 229, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(255, 255, 255, 0.7)`,
                   style: {
                     borderRadius: 16,
                   },
                   propsForDots: {
                     r: '4',
                     strokeWidth: '2',
-                    stroke: '#3b82f6',
+                    stroke: '#E5F3E5',
                   },
                 }}
                 bezier
@@ -141,7 +150,8 @@ export default function Dashboard() {
           </ScrollView>
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -180,11 +190,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollView: {
+    flex: 1,
+  },
   space: {
     gap: 20,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 20,
   },
   welcomeCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    marginHorizontal: 0,
   },
   welcomeHeader: {
     flexDirection: 'row',
@@ -193,23 +209,20 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   welcomeSubtitle: {
-    color: '#6b7280',
+    opacity: 0.8,
   },
   welcomeTitle: {
-    color: '#3b82f6',
     fontWeight: '800',
   },
   statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
     paddingHorizontal: 12,
-    paddingVertical: 4,
+    paddingVertical: 6,
     borderRadius: 20,
     gap: 4,
   },
   statusText: {
-    color: '#3b82f6',
     fontWeight: '500',
   },
   statsGrid: {
@@ -218,11 +231,19 @@ const styles = StyleSheet.create({
   },
   smallStat: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderRadius: 12,
     padding: 12,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   statHeader: {
     flexDirection: 'row',
@@ -231,14 +252,15 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   statLabel: {
-    color: '#6b7280',
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   statValue: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '600',
   },
   moistureCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   moistureHeader: {
     flexDirection: 'row',
@@ -247,13 +269,23 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   moistureValue: {
-    color: '#3b82f6',
+    color: '#ffffff',
     fontWeight: '800',
   },
   detailsButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  detailsButtonText: {
+    color: '#ffffff',
+    fontWeight: '500',
   },
   chartContainer: {
     height: 120,
@@ -267,10 +299,11 @@ const styles = StyleSheet.create({
   },
   progress: {
     height: 8,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   scheduleCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   scheduleText: {
     marginBottom: 12,
@@ -298,7 +331,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   plantsTitle: {
-    color: '#3b82f6',
+    color: '#ffffff',
     fontWeight: '600',
   },
   plantsScroll: {
@@ -306,12 +339,20 @@ const styles = StyleSheet.create({
   },
   plantCard: {
     minWidth: 160,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderRadius: 16,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     marginRight: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   plantHeader: {
     flexDirection: 'row',
@@ -321,32 +362,34 @@ const styles = StyleSheet.create({
   },
   plantName: {
     fontWeight: '600',
+    color: '#ffffff',
   },
   moistureBadge: {
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 12,
   },
   moistureBadgeText: {
-    color: '#3b82f6',
+    color: '#ffffff',
     fontWeight: '500',
   },
   plantStatus: {
     marginBottom: 12,
+    color: 'rgba(255, 255, 255, 0.8)',
   },
   plantProgressContainer: {
     marginTop: 12,
   },
   plantProgressBackground: {
     height: 8,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 4,
     overflow: 'hidden',
   },
   plantProgressFill: {
     height: '100%',
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#E5F3E5',
     borderRadius: 4,
   },
 });

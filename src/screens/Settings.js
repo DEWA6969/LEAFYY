@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity, Switch, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Card, CardHeader, CardContent, CardTitle, Text } from '../components/ui';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Settings() {
   const { logout, user: contextUser } = useAuth();
+  const { isDarkMode, toggleTheme, colors } = useTheme();
   const navigation = useNavigation();
   const [user, setUser] = useState(contextUser);
 
@@ -56,7 +59,8 @@ export default function Settings() {
     );
   };
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <Text variant="h2" style={styles.title}>Settings</Text>
       </View>
@@ -72,7 +76,7 @@ export default function Settings() {
           <CardContent>
             <View style={styles.userInfo}>
               <View style={styles.userAvatar}>
-                <Ionicons name="person-circle-outline" size={60} color="#10b981" />
+                <Ionicons name="person-circle-outline" size={60} color="#ffffff" />
               </View>
               <View style={styles.userDetails}>
                 <Text variant="h3" style={styles.username}>
@@ -98,7 +102,7 @@ export default function Settings() {
               icon="notifications-outline"
               title="Notifications"
               subtitle="Configure notification preferences"
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Notifications')}
             />
             <SettingItem
               icon="shield-outline"
@@ -186,8 +190,8 @@ export default function Settings() {
               icon="moon-outline"
               title="Dark Mode"
               subtitle="Switch to dark theme"
-              value={false}
-              onValueChange={() => {}}
+              value={isDarkMode}
+              onValueChange={toggleTheme}
             />
             <SettingItemWithToggle
               icon="location-outline"
@@ -211,7 +215,8 @@ export default function Settings() {
           </CardContent>
         </Card>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -219,13 +224,13 @@ function SettingItem({ icon, title, subtitle, onPress, isDestructive = false }) 
   return (
     <TouchableOpacity style={styles.settingItem} onPress={onPress}>
       <View style={styles.settingIcon}>
-        <Ionicons name={icon} size={20} color={isDestructive ? "#ef4444" : "#6b7280"} />
+        <Ionicons name={icon} size={20} color={isDestructive ? "#ef4444" : "#ffffff"} />
       </View>
       <View style={styles.settingContent}>
         <Text variant="body" style={[styles.settingTitle, isDestructive && styles.destructiveText]}>{title}</Text>
         <Text variant="muted" style={styles.settingSubtitle}>{subtitle}</Text>
       </View>
-      <Ionicons name="chevron-forward" size={16} color="#9ca3af" />
+      <Ionicons name="chevron-forward" size={16} color="rgba(255, 255, 255, 0.7)" />
     </TouchableOpacity>
   );
 }
@@ -234,7 +239,7 @@ function SettingItemWithToggle({ icon, title, subtitle, value, onValueChange }) 
   return (
     <View style={styles.settingItem}>
       <View style={styles.settingIcon}>
-        <Ionicons name={icon} size={20} color="#6b7280" />
+        <Ionicons name={icon} size={20} color="#ffffff" />
       </View>
       <View style={styles.settingContent}>
         <Text variant="body" style={styles.settingTitle}>{title}</Text>
@@ -253,14 +258,16 @@ function SettingItemWithToggle({ icon, title, subtitle, value, onValueChange }) 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+  },
+  scrollView: {
+    flex: 1,
   },
   header: {
     paddingHorizontal: 16,
     paddingVertical: 16,
   },
   title: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '700',
   },
   content: {
@@ -268,20 +275,21 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   sectionCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
+    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
   },
   settingIcon: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -290,7 +298,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   settingTitle: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '500',
     marginBottom: 2,
   },
@@ -304,7 +312,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginBottom: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
+    borderBottomColor: 'rgba(255, 255, 255, 0.1)',
   },
   userAvatar: {
     marginRight: 16,
@@ -313,12 +321,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   username: {
-    color: '#1f2937',
+    color: '#ffffff',
     fontWeight: '600',
     marginBottom: 4,
   },
   userEmail: {
-    color: '#6b7280',
+    color: 'rgba(255, 255, 255, 0.8)',
     fontSize: 13,
   },
   notLoggedIn: {

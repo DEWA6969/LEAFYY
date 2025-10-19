@@ -25,7 +25,7 @@ export const Progress = ({
         style={{
           height: '100%',
           width: `${percentage}%`,
-          backgroundColor: '#3b82f6',
+          backgroundColor: '#E5F3E5',
           borderRadius: 4,
         }}
       />

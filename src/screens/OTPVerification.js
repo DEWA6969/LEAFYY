@@ -56,7 +56,7 @@ export default function OTPVerification({ route, navigation }) {
       setLoading(true);
       console.log('🔐 Verifying OTP:', otpCode);
       
-      const response = await api.verifyOTP(email, otpCode);
+      const response = await api.verifyOTP(userId, otpCode);
       
       setLoading(false);
       
@@ -93,7 +93,7 @@ export default function OTPVerification({ route, navigation }) {
       setResending(true);
       console.log('📧 Resending OTP...');
       
-      const response = await api.resendOTP(email);
+      const response = await api.resendOTP(userId);
       
       setResending(false);
       
@@ -113,6 +113,7 @@ export default function OTPVerification({ route, navigation }) {
   };
 
   return (
+    
     <View style={styles.container}>
       <View style={styles.content}>
         {/* Header */}

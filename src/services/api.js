@@ -1,12 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// URL Basis API - Otomatis detect environment
-const API_URL = __DEV__ 
-  ? 'http://localhost:3000/api'  // Development - localhost
-  : 'http://20.60.17.158:3000/api'; // Production
-
-// For testing on real device, uncomment and replace with your IP:
-// const API_URL = 'http://192.168.1.100:3000/api';
+// Base API URL - use LAN IP so Expo Go/real device can reach backend
+// Replace with your PC's IPv4 if it changes
+const API_URL = 'http://192.168.54.13:3000/api';
 
 class API {
   // Helper function to get headers
@@ -29,11 +25,15 @@ class API {
         body: JSON.stringify(userData),
       });
 
+      const data = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return (
+          data || {
+            success: false,
+            message: `HTTP error ${response.status}`,
+          }
+        );
       }
-
-      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Register API error:', error);
@@ -47,14 +47,14 @@ class API {
   }
 
   // Verify OTP
-  async verifyOTP(email, otp) {
+  async verifyOTP(userId, otp) {
     try {
       const response = await fetch(`${API_URL}/auth/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, otp }),
+        body: JSON.stringify({ userId, otp }),
       });
 
       if (!response.ok) {
@@ -75,14 +75,14 @@ class API {
   }
 
   // Resend OTP
-  async resendOTP(email) {
+  async resendOTP(userId) {
     try {
       const response = await fetch(`${API_URL}/auth/resend-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ userId }),
       });
 
       if (!response.ok) {
@@ -113,11 +113,16 @@ class API {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Pass through server error payload (e.g., requiresVerification, userId, message)
+        return (
+          data || {
+            success: false,
+            message: `HTTP error ${response.status}`,
+          }
+        );
       }
-
-      const data = await response.json();
       return data;
     } catch (error) {
       console.error('Login API error:', error);

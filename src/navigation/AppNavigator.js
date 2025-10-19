@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../context/ThemeContext';
 
 // Screens
 import Dashboard from '../screens/Dashboard';
@@ -15,13 +16,20 @@ import OTPVerification from '../screens/OTPVerification';
 import ForgotPassword from '../screens/ForgotPassword';
 import ResetPassword from '../screens/ResetPassword';
 import Onboarding from '../screens/Onboarding';
+import SoilMoistureDetails from '../screens/SoilMoistureDetails';
+import Notifications from '../screens/Notifications';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function MainTabs() {
+  const { colors } = useTheme();
+  
   return (
     <Tab.Navigator
+      sceneContainerStyle={{
+        backgroundColor: colors.background
+      }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -38,26 +46,15 @@ function MainTabs() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#3b82f6',
-        tabBarInactiveTintColor: '#6b7280',
+        backgroundColor: colors.background,
+        tabBarActiveTintColor: colors.tabBarActive,
+        tabBarInactiveTintColor: colors.tabBarInactive,
         tabBarStyle: {
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          borderTopWidth: 1,
-          borderTopColor: '#e5e7eb',
-          borderRadius: 16,
-          marginHorizontal: 16,
-          marginBottom: 16,
+          backgroundColor: colors.tabBarBackground,
+          borderTopWidth: 0,
           height: 80,
           paddingBottom: 20,
           paddingTop: 8,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.1,
-          shadowRadius: 8,
-          elevation: 4,
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -109,6 +106,8 @@ export default function AppNavigator() {
           <Stack.Screen name="Onboarding" component={Onboarding} />
           <Stack.Screen name="MainTabs" component={MainTabs} />
           <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="SoilMoistureDetails" component={SoilMoistureDetails} />
+          <Stack.Screen name="Notifications" component={Notifications} />
       </Stack.Navigator>
     </NavigationContainer>
   );

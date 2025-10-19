@@ -4,8 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../ui/Text';
+import { useNavigation } from '@react-navigation/native';
 
 export const MobileShell = ({ children }) => {
+  const navigation = useNavigation();
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -14,7 +17,10 @@ export const MobileShell = ({ children }) => {
             <Text style={styles.titleLeafyy}>LEAFYY</Text>
             <Text style={styles.titleTech}>TECH</Text>
           </View>
-          <TouchableOpacity style={styles.notificationButton}>
+          <TouchableOpacity 
+            style={styles.notificationButton}
+            onPress={() => navigation.navigate('Notifications')}
+          >
             <Ionicons name="notifications-outline" size={24} color="#6b7280" />
           </TouchableOpacity>
         </View>
